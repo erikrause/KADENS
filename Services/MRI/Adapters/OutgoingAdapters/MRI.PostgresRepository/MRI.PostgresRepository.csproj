@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MRI.OutgoingPorts\MRI.OutgoingPorts.csproj" />
+    <ProjectReference Include="..\..\..\Ports\MRI.OutgoingPorts\MRI.OutgoingPorts.csproj" />
   </ItemGroup>
 
 </Project>

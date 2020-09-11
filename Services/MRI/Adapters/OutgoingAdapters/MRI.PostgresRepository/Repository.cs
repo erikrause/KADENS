@@ -3,7 +3,7 @@ using System;
 
 namespace MRI.PostgresRepository
 {
-    public class Repository : IRepository
+    public class Repository //: IRepository
     {
     }
 }

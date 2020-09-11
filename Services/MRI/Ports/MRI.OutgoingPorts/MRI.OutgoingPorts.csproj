@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\MRI\Core\MRI.Domain\MRI.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\MRI.Domain\MRI.Domain.csproj" />
   </ItemGroup>
 
 </Project>
