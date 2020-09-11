@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MRI
+namespace MRI.Application
 {
     public class Class1
     {
