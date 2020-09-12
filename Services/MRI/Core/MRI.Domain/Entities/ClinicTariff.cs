@@ -9,8 +9,8 @@ namespace MRI.Domain.Entities
     {
         public int TariffId { get; protected set; }
         public virtual Tariff Tariff { get; protected set; }
-        //public int ClinicId { get; protected set; }
-        public virtual Clinic Clinic { get; protected set; }
+        ///////public int ClinicId { get; protected set; }
+        //public virtual Clinic Clinic { get; protected set; }
         public DateTime DateStart { get; protected set; }
         public DateTime DateEnd { get; protected set; }
     }

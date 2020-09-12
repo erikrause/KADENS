@@ -9,8 +9,8 @@ namespace MRI.Domain.Entities
     {
         public int TariffId { get; protected set; }
         public virtual Tariff Tariff { get; protected set; }
-        public int ServiceId { get; protected set; }
-        public virtual Service Service { get; protected set; }
+        //public int ServiceId { get; protected set; }
+        //public virtual Service Service { get; protected set; }
         public int TransactionsCount { get; protected set; }
     }
 }
