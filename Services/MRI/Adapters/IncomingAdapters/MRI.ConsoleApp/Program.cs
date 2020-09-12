@@ -20,10 +20,47 @@ namespace MRI.ConsoleApp
             {
                 /*var tariff = new Tariff(1,"probName1", 1, false, "first prob", 1);
                 var blog = new Blog { Url = "ProbUrl" }; */
-                //var Clinic = new Clinic
-                //db.Add(blog);
+                /*var clinic = new Clinic
+                    (
+                    "probName",
+                    "probAddr",
+                    "probPhone",
+                    "probBIK",
+                    "probINN"
+                    );
+                db.Add(clinic);
                 db.SaveChanges();
-                
+
+                var payment = new Payment
+                    (
+                    "probPurpose",
+                    "probBIK",
+                    "probINN",
+                    100,
+                    clinic.Id,
+                    1
+                    );
+                db.Add(payment);
+                db.SaveChanges();
+                */
+                var clinic2 = db.Set<Clinic>().Find(1);
+                var listPayments = clinic2.Payments;
+                var prob = db.Set<Payment>().Find(1);
+                var billP = db.Set<Bill>().Find(1);
+                var payement = billP.Payment;
+                var bill = new Bill
+                    (
+                    1,
+                    102349,
+                    DateTime.Now,
+                    DateTime.Now,
+                    true,
+                    "probStatus",
+                    100,
+                    200
+                    );
+                db.Add(bill);
+                db.SaveChanges();
             }
         }
     }

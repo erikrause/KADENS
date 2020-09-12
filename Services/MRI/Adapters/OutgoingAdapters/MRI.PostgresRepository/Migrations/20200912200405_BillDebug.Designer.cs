@@ -3,15 +3,17 @@ using System;
 using MRI.PostgresRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MRI.PostgresRepository.Migrations
 {
     [DbContext(typeof(MriDbContext))]
-    partial class MriDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200912200405_BillDebug")]
+    partial class BillDebug
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

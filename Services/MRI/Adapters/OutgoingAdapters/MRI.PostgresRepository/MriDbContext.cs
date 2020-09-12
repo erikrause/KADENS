@@ -61,11 +61,10 @@ namespace MRI.PostgresRepository
                 .WithOne(p => p.Clinic)
                 .HasForeignKey(p => p.ClinicId);
 
-            // TOOD: check for FK nullable = true
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Bill)
                 .WithOne(b => b.Payment)
-                .HasForeignKey<Payment>(p => p.BillId);
+                .HasForeignKey<Bill>(b => b.Id);
 
             modelBuilder.Entity<Patient>()
                 .HasMany(p => p.Inspections)
@@ -89,10 +88,10 @@ namespace MRI.PostgresRepository
                 .WithOne(b => b.Post)
                 .HasForeignKey<Post>(p => p.Id);*/
         }
-        /*
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=probdb2;Username=postgres;Password=erik86kam13");
-        }*/
+            optionsBuilder.UseLazyLoadingProxies();
+        }
     }
 }

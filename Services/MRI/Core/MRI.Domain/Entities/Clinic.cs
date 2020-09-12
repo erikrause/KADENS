@@ -7,6 +7,22 @@ namespace MRI.Domain.Entities
 {
     public class Clinic : Entity
     {
+        public Clinic() { }
+        public Clinic
+            (
+            string name,
+            string contactAddress,
+            string phone,
+            string bIK,
+            string iNN
+            ) :base()
+        {
+            Name = name;
+            ContactAddress = contactAddress;
+            Phone = phone;
+            BIK = bIK;
+            INN = iNN;
+        }
         public string Name { get; protected set; }
         public string ContactAddress { get; protected set; }
         public string Phone { get; protected set; }
