@@ -15,5 +15,6 @@ namespace MRI.Domain.Entities
         public string Name { get; protected set; }
         public string Patronymic { get; protected set; }
         public string Phone { get; protected set; }
+        public virtual List<Patient> Patients { get; protected set; }
     }
 }

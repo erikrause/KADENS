@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using MRI.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,64 @@ namespace MRI.PostgresRepository
                 .HasMany(t => t.TariffsForService)
                 .WithOne(tFS => tFS.Tariff)
                 .HasForeignKey(tFS => tFS.TariffId);
+
+            modelBuilder.Entity<ClinicTariff>()
+                .HasOne(c => c.Clinic)
+                .WithOne(cT => cT.ClinicTariff)
+                .HasForeignKey<ClinicTariff>(cT => cT.Id);
+
+            modelBuilder.Entity<TariffForService>()
+                .HasOne(tFS => tFS.Service)
+                .WithMany(s => s.TariffForServices)
+                .HasForeignKey(tFS => tFS.ServiceId);
+
+            modelBuilder.Entity<Service>()
+                .HasMany(s => s.TransactionsLeftovers)
+                .WithOne(tL => tL.Service)
+                .HasForeignKey(tL => tL.ServiceId);
+
+            modelBuilder.Entity<TransactionsLeftovers>()
+                .HasOne(tL => tL.Clinic)
+                .WithMany(c => c.TransactionsLeftovers)
+                .HasForeignKey(tL => tL.ClinicId);
+
+            modelBuilder.Entity<Clinic>()
+                .HasMany(c => c.Doctors)
+                .WithOne(d => d.Clinic)
+                .HasForeignKey(d => d.ClinicId);
+
+            modelBuilder.Entity<Doctor>()
+                .HasMany(d => d.Patients)
+                .WithOne(p => p.Doctor)
+                .HasForeignKey(p => p.DoctorId);
+
+            modelBuilder.Entity<Clinic>()
+                .HasMany(c => c.Payments)
+                .WithOne(p => p.Clinic)
+                .HasForeignKey(p => p.ClinicId);
+
+            // TOOD: check for FK nullable = true
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Bill)
+                .WithOne(b => b.Payment)
+                .HasForeignKey<Payment>(p => p.BillId);
+
+            modelBuilder.Entity<Patient>()
+                .HasMany(p => p.Inspections)
+                .WithOne(i => i.Patient)
+                .HasForeignKey(i => i.PatientId);
+
+            modelBuilder.Entity<Inspection>()
+                .HasOne(i => i.Mri)
+                .WithOne(m => m.Inspection)
+                .HasForeignKey<Mri>(m => m.Id);
+
+            // TODO: разделить User Identity на другой микросервис.
+            modelBuilder.Entity<Doctor>()
+                .HasOne(d => d.User)
+                .WithOne(u => u.Doctor)
+                .HasForeignKey<Doctor>(d => d.UserId);
+
             /*
             modelBuilder.Entity<Post>()
                 .HasOne(p => p.Blog)

@@ -18,10 +18,12 @@ namespace MRI.ConsoleApp
 
             using (var db = contextFactory.CreateDbContext(null))
             {
-                //var tariff = new Tariff(1,"probName1", 1, false, "first prob", 1);
-                var blog = new Blog { Url = "ProbUrl" };
-                db.Add(blog);
+                /*var tariff = new Tariff(1,"probName1", 1, false, "first prob", 1);
+                var blog = new Blog { Url = "ProbUrl" }; */
+                //var Clinic = new Clinic
+                //db.Add(blog);
                 db.SaveChanges();
+                
             }
         }
     }
