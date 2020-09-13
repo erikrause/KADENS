@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.IncomingPorts", "Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.OutgoingPorts", "Services\MRI\Ports\MRI.OutgoingPorts\MRI.OutgoingPorts.csproj", "{F196DB67-5639-4EAD-875C-C2294EA1E341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.ConsoleApp", "Services\MRI\Adapters\IncomingAdapters\MRI.ConsoleApp\MRI.ConsoleApp.csproj", "{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.ConsoleApp", "Services\MRI\Adapters\IncomingAdapters\MRI.ConsoleApp\MRI.ConsoleApp.csproj", "{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.OpenApi", "Services\MRI\Adapters\IncomingAdapters\MRI.OpenApi\MRI.OpenApi.csproj", "{275EC9AF-007F-47E0-A900-1B9E11E2F68E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{275EC9AF-007F-47E0-A900-1B9E11E2F68E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275EC9AF-007F-47E0-A900-1B9E11E2F68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275EC9AF-007F-47E0-A900-1B9E11E2F68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275EC9AF-007F-47E0-A900-1B9E11E2F68E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{55CDD004-EF61-4313-B552-93F0C65E1CEF} = {83879F5D-4F3E-4516-B255-F3F612AB4EC0}
 		{F196DB67-5639-4EAD-875C-C2294EA1E341} = {83879F5D-4F3E-4516-B255-F3F612AB4EC0}
 		{DD0451E8-6BE5-4F6B-A2F6-C54563F497E5} = {5F36AA63-E60E-427D-908D-1685F950633B}
+		{275EC9AF-007F-47E0-A900-1B9E11E2F68E} = {5F36AA63-E60E-427D-908D-1685F950633B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3409167-88C1-46F8-8774-C7E0FDEE4690}

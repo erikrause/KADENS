@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace MRI.PostgresRepository
 {
-    public class Repository : IRepository
+    public class EFCoreRepository : IRepository
     {
         readonly DbContext _db;
 
-        public Repository(MriDbContext mriDbContext)
+        public EFCoreRepository(MriDbContext mriDbContext)
         {
             _db = mriDbContext;
         }
