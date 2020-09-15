@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MRI.PostgresRepository.Migrations
 {
     [DbContext(typeof(MriDbContext))]
-    [Migration("20200912151623_AddAllRelationships")]
-    partial class AddAllRelationships
+    [Migration("20200915170223_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,15 +24,16 @@ namespace MRI.PostgresRepository.Migrations
             modelBuilder.Entity("MRI.Domain.Entities.Bill", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
                     b.Property<DateTime>("BillDate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("BillNumber")
+                        .HasColumnType("integer");
 
                     b.Property<int>("BillStatus")
                         .HasColumnType("integer");
@@ -200,14 +201,8 @@ namespace MRI.PostgresRepository.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("BLK")
+                    b.Property<string>("BIK")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("BillDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("BillId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("ClinicId")
                         .HasColumnType("integer");
@@ -222,9 +217,6 @@ namespace MRI.PostgresRepository.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BillId")
-                        .IsUnique();
 
                     b.HasIndex("ClinicId");
 
@@ -362,6 +354,15 @@ namespace MRI.PostgresRepository.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("MRI.Domain.Entities.Bill", b =>
+                {
+                    b.HasOne("MRI.Domain.Entities.Payment", "Payment")
+                        .WithOne("Bill")
+                        .HasForeignKey("MRI.Domain.Entities.Bill", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MRI.Domain.Entities.ClinicTariff", b =>
                 {
                     b.HasOne("MRI.Domain.Entities.Clinic", "Clinic")
@@ -421,10 +422,6 @@ namespace MRI.PostgresRepository.Migrations
 
             modelBuilder.Entity("MRI.Domain.Entities.Payment", b =>
                 {
-                    b.HasOne("MRI.Domain.Entities.Bill", "Bill")
-                        .WithOne("Payment")
-                        .HasForeignKey("MRI.Domain.Entities.Payment", "BillId");
-
                     b.HasOne("MRI.Domain.Entities.Clinic", "Clinic")
                         .WithMany("Payments")
                         .HasForeignKey("ClinicId")

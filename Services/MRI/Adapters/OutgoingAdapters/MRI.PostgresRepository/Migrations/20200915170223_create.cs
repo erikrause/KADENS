@@ -4,42 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MRI.PostgresRepository.Migrations
 {
-    public partial class AddAllRelationships : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ServiceId",
-                table: "TariffForService",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "ClinicTariff",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "integer")
-                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            migrationBuilder.CreateTable(
-                name: "Bill",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BillDate = table.Column<DateTime>(nullable: false),
-                    PaymentDate = table.Column<DateTime>(nullable: false),
-                    IsPayed = table.Column<bool>(nullable: false),
-                    StatusDescription = table.Column<string>(nullable: true),
-                    Amount = table.Column<decimal>(nullable: false),
-                    BillStatus = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bill", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Clinic",
                 columns: table => new
@@ -73,6 +41,24 @@ namespace MRI.PostgresRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tariffs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RequestsCount = table.Column<decimal>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    IsEnabled = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Duration = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tariffs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -97,23 +83,15 @@ namespace MRI.PostgresRepository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Purpose = table.Column<string>(nullable: true),
-                    BLK = table.Column<string>(nullable: true),
+                    BIK = table.Column<string>(nullable: true),
                     INN = table.Column<string>(nullable: true),
                     Amount = table.Column<decimal>(nullable: false),
-                    BillDate = table.Column<DateTime>(nullable: false),
                     ClinicId = table.Column<int>(nullable: false),
-                    BillId = table.Column<int>(nullable: true),
                     OperationStatus = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Payment_Bill_BillId",
-                        column: x => x.BillId,
-                        principalTable: "Bill",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Payment_Clinic_ClinicId",
                         column: x => x.ClinicId,
@@ -150,6 +128,59 @@ namespace MRI.PostgresRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClinicTariff",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    TariffId = table.Column<int>(nullable: false),
+                    DateStart = table.Column<DateTime>(nullable: false),
+                    DateEnd = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClinicTariff", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClinicTariff_Clinic_Id",
+                        column: x => x.Id,
+                        principalTable: "Clinic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClinicTariff_Tariffs_TariffId",
+                        column: x => x.TariffId,
+                        principalTable: "Tariffs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TariffForService",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TariffId = table.Column<int>(nullable: false),
+                    ServiceId = table.Column<int>(nullable: false),
+                    TransactionsCount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TariffForService", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TariffForService_Service_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Service",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TariffForService_Tariffs_TariffId",
+                        column: x => x.TariffId,
+                        principalTable: "Tariffs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctor",
                 columns: table => new
                 {
@@ -175,6 +206,30 @@ namespace MRI.PostgresRepository.Migrations
                         name: "FK_Doctor_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bill",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    BillNumber = table.Column<int>(nullable: false),
+                    BillDate = table.Column<DateTime>(nullable: false),
+                    PaymentDate = table.Column<DateTime>(nullable: false),
+                    IsPayed = table.Column<bool>(nullable: false),
+                    StatusDescription = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    BillStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bill", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bill_Payment_Id",
+                        column: x => x.Id,
+                        principalTable: "Payment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -239,9 +294,9 @@ namespace MRI.PostgresRepository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TariffForService_ServiceId",
-                table: "TariffForService",
-                column: "ServiceId");
+                name: "IX_ClinicTariff_TariffId",
+                table: "ClinicTariff",
+                column: "TariffId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctor_ClinicId",
@@ -265,15 +320,19 @@ namespace MRI.PostgresRepository.Migrations
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_BillId",
-                table: "Payment",
-                column: "BillId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Payment_ClinicId",
                 table: "Payment",
                 column: "ClinicId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TariffForService_ServiceId",
+                table: "TariffForService",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TariffForService_TariffId",
+                table: "TariffForService",
+                column: "TariffId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TransactionsLeftovers_ClinicId",
@@ -284,48 +343,33 @@ namespace MRI.PostgresRepository.Migrations
                 name: "IX_TransactionsLeftovers_ServiceId",
                 table: "TransactionsLeftovers",
                 column: "ServiceId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ClinicTariff_Clinic_Id",
-                table: "ClinicTariff",
-                column: "Id",
-                principalTable: "Clinic",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TariffForService_Service_ServiceId",
-                table: "TariffForService",
-                column: "ServiceId",
-                principalTable: "Service",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_ClinicTariff_Clinic_Id",
-                table: "ClinicTariff");
+            migrationBuilder.DropTable(
+                name: "Bill");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_TariffForService_Service_ServiceId",
-                table: "TariffForService");
+            migrationBuilder.DropTable(
+                name: "ClinicTariff");
 
             migrationBuilder.DropTable(
                 name: "Mri");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "TariffForService");
 
             migrationBuilder.DropTable(
                 name: "TransactionsLeftovers");
 
             migrationBuilder.DropTable(
+                name: "Payment");
+
+            migrationBuilder.DropTable(
                 name: "Inspection");
 
             migrationBuilder.DropTable(
-                name: "Bill");
+                name: "Tariffs");
 
             migrationBuilder.DropTable(
                 name: "Service");
@@ -341,22 +385,6 @@ namespace MRI.PostgresRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropIndex(
-                name: "IX_TariffForService_ServiceId",
-                table: "TariffForService");
-
-            migrationBuilder.DropColumn(
-                name: "ServiceId",
-                table: "TariffForService");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "ClinicTariff",
-                type: "integer",
-                nullable: false,
-                oldClrType: typeof(int))
-                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
         }
     }
 }
