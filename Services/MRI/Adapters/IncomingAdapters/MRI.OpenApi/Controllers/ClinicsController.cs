@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRI.Domain.Entities;
@@ -12,19 +10,17 @@ using MRI.OpenApi.Controllers.Abstract;
 using MRI.OpenApi.Models.Request;
 using MRI.OpenApi.Models.Response;
 using MRI.OutgoingPorts;
-using MRI.PostgresRepository;
 using Swashbuckle.AspNetCore.Annotations;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MRI.OpenApi.Controllers
 {
-    /// <summary>
-    /// Контроллер чеков
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class BillsController : CrudController<Bill, BillCreateRequest, BillResponse>
+    public class ClinicsController : CrudController<Clinic, ClinicCreateRequest, ClinicResponse>
     {
-        public BillsController(IRepository repository) : base(repository)
+        public ClinicsController(IRepository repository) : base(repository)
         {
         }
     }

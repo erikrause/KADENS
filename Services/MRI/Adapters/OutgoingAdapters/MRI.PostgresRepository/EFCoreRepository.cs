@@ -41,9 +41,9 @@ namespace MRI.PostgresRepository
             var result = await _db.Set<T>().OrderBy(t => t.Id).ToListAsync();
             return result.AsQueryable();    // спросить у егорова
         }
-        public async Task Remove<T>(T entity) where T : Entity
+        public async Task Remove<T>(int id) where T : Entity
         {
-            var cache = await _db.Set<T>().FindAsync(entity.Id);    //Todo
+            var cache = await _db.Set<T>().FindAsync(id);    //Todo
             _db.Set<T>().Remove(cache);
             await _db.SaveChangesAsync();
         }

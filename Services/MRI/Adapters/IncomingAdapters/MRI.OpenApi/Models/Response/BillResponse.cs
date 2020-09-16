@@ -8,12 +8,12 @@ namespace MRI.OpenApi.Models.Response
 {
     public class BillResponse : EntityResponse
     {
-        public int BillNumber { get; protected set; }
-        public DateTime BillDate { get; protected set; }
-        public DateTime PaymentDate { get; protected set; }
-        public bool IsPayed { get; protected set; }
-        public string StatusDescription { get; protected set; }
-        public decimal Amount { get; protected set; }
-        public int BillStatus { get; protected set; }
+        public int BillNumber { get; set; }
+        public DateTime BillDate { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public bool IsPayed { get; set; }
+        public string StatusDescription { get; set; }
+        public decimal Amount { get; set; }
+        public int BillStatus { get; set; }
     }
 }

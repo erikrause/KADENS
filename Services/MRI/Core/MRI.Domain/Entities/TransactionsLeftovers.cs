@@ -7,6 +7,17 @@ namespace MRI.Domain.Entities
 {
     public class TransactionsLeftovers : Entity
     {
+        public TransactionsLeftovers
+            (
+            int clinicId,
+            int serviceId,
+            int transactionsLeft
+            )
+        {
+            ClinicId = clinicId;
+            ServiceId = serviceId;
+            TransactionsLeft = transactionsLeft;
+        }
         public int ClinicId { get; protected set; }
         public virtual Clinic Clinic { get; protected set; }
         public int ServiceId { get; protected set; }

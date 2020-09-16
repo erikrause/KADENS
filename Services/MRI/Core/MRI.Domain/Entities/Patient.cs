@@ -7,7 +7,16 @@ namespace MRI.Domain.Entities
 {
     public class Patient : Entity
     {
-        // Убра круговую связь.
+        public Patient
+            (
+            int doctorId,
+            string cardNumber
+            )
+        {
+            DoctorId = doctorId;
+            CardNumber = cardNumber;
+        }
+        // Убрал круговую связь.
         //public int ClinicId { get; protected set; }
         //public virtual Clinic Clinic { get; protected set; }
         public int DoctorId { get; protected set; }

@@ -7,6 +7,19 @@ namespace MRI.Domain.Entities
 {
     public class User : Entity
     {
+        public User
+            (
+            string login,
+            string password,
+            string email
+            )
+        {
+            Login = login;
+            Password = password;
+            Email = email;
+            CreationDate = DateTime.Now;
+            IsLockedOut = false;
+        }
         public virtual Doctor Doctor { get; protected set; }
         public string Login { get; protected set; }
         public string Password { get; protected set; }

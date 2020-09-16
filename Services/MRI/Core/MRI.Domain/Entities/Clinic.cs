@@ -7,7 +7,6 @@ namespace MRI.Domain.Entities
 {
     public class Clinic : Entity
     {
-        public Clinic() { }
         public Clinic
             (
             string name,
@@ -15,7 +14,7 @@ namespace MRI.Domain.Entities
             string phone,
             string bIK,
             string iNN
-            ) :base()
+            )
         {
             Name = name;
             ContactAddress = contactAddress;

@@ -9,7 +9,6 @@ namespace MRI.Domain.Entities
     {
         public Bill
             (
-            int id,
             int billNumber,
             DateTime billDate,
             DateTime paymentDate,
@@ -19,7 +18,6 @@ namespace MRI.Domain.Entities
             int billStatus
             )
         {
-            Id = id;
             BillNumber = billNumber;
             BillDate = billDate;
             PaymentDate = paymentDate;

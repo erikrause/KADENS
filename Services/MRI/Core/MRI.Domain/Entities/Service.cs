@@ -7,6 +7,17 @@ namespace MRI.Domain.Entities
 {
     public class Service : Entity
     {
+        public Service
+            (
+            string name,
+            string description,
+            decimal priceForTransaction
+            )
+        {
+            Name = name;
+            Description = description;
+            PriceForTransaction = priceForTransaction;
+        }
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         // было double.
