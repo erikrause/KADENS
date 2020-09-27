@@ -48,7 +48,7 @@ namespace MRI.ConsoleApp
                 var prob = db.Set<Payment>().Find(1);
                 var billP = db.Set<Bill>().Find(1);
                 var payement = billP.Payment;
-                var bill = new Bill
+                /*var bill = new Bill
                     (
                     1,
                     102349,
@@ -60,7 +60,7 @@ namespace MRI.ConsoleApp
                     200
                     );
                 db.Add(bill);
-                db.SaveChanges();
+                db.SaveChanges();*/
             }
         }
     }

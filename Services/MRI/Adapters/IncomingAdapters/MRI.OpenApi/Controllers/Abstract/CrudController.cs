@@ -37,7 +37,7 @@ namespace MRI.OpenApi.Controllers.Abstract
         /// <returns> List of entities. </returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public virtual async Task<IActionResult> Get()
+        public virtual async Task<ActionResult<IEnumerable<TEntityResponse>>> Get()
         {
             IEnumerable<TEntity> entities = await _repo.GetAll<TEntity>();
             return Ok(_mapper.Map<IEnumerable<TEntityResponse>>(entities));
@@ -53,7 +53,7 @@ namespace MRI.OpenApi.Controllers.Abstract
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[ProducesDefaultResponseType]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<ActionResult<TEntityResponse>> Get(int id)
         {
             var entity = await _repo.Get<TEntity>(id);
 
@@ -73,7 +73,7 @@ namespace MRI.OpenApi.Controllers.Abstract
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesDefaultResponseType]
         [HttpPost]
-        public virtual async Task<IActionResult> Create([FromBody] TEntityCreateRequest entityCreateRequest)
+        public virtual async Task<ActionResult> Create([FromBody] TEntityCreateRequest entityCreateRequest)
         {
             TEntity entity = _mapper.Map<TEntity>(entityCreateRequest);
             await _repo.Save(entity);
@@ -90,7 +90,7 @@ namespace MRI.OpenApi.Controllers.Abstract
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[ProducesDefaultResponseType]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<ActionResult> Delete(int id)
         {
             try
             {
