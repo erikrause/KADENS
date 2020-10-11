@@ -31,12 +31,23 @@ namespace MRI.Mvc
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("Postgres")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser<int>>(options => 
+            { 
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton<Client>(new Client(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "402748804532-igldkrb545os0sfqm5la83e0fr4rq0no.apps.googleusercontent.com";
+                options.ClientSecret = "KvEarGbj2LxurHKF5kol0GA1";
+            });
+
+            services.AddSingleton(new Client(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

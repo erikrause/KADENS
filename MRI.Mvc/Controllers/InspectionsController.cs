@@ -4,41 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MRI.Mvc.Infrastructure;
 using MriApi;
 
 namespace MRI.Mvc.Controllers
 {
-    public class ClinicsController : Controller
+    public class InspectionsController : Controller
     {
         readonly Client _client;
-        public ClinicsController(Client client)
+        public InspectionsController(Client client)
         {
             _client = client;
         }
-        // GET: ClinicsController
+
+        // GET: InspectionsController
         public async Task<ActionResult> Index()
         {
-            var clinics = await _client.ApiClinicsGetAsync();
-            return View(clinics);
+            return View(await _client.ApiInspectionsGetAsync());
         }
 
-        // GET: ClinicsController/Details/5
-        public ActionResult Details(int id)
+        // GET: InspectionsController/Details/5
+        public async Task<ActionResult> Details(int id)
+        {
+            return View(await _client.ApiInspectionsGetAsync(id));
+        }
+
+        // GET: InspectionsController/Create
+        public async Task<ActionResult> Create()
         {
             return View();
         }
 
-        // GET: ClinicsController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ClinicsController/Create
+        // POST: InspectionsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
@@ -50,16 +49,16 @@ namespace MRI.Mvc.Controllers
             }
         }
 
-        // GET: ClinicsController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: InspectionsController/Edit/5
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            return View(await _client.ApiInspectionsGetAsync(id));
         }
 
-        // POST: ClinicsController/Edit/5
+        // POST: InspectionsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -71,16 +70,16 @@ namespace MRI.Mvc.Controllers
             }
         }
 
-        // GET: ClinicsController/Delete/5
+        // GET: InspectionsController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ClinicsController/Delete/5
+        // POST: InspectionsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {

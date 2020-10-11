@@ -51,16 +51,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task BillsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BillResponse>> ApiBillsGetAsync()
         {
-            return BillsAsync(System.Threading.CancellationToken.None);
+            return ApiBillsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task BillsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BillResponse>> ApiBillsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Bills");
@@ -72,6 +72,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -94,7 +95,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BillResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -120,9 +126,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Bills2Async(BillCreateRequest body)
+        public System.Threading.Tasks.Task ApiBillsPostAsync(BillCreateRequest body)
         {
-            return Bills2Async(body, System.Threading.CancellationToken.None);
+            return ApiBillsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -130,7 +136,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Bills2Async(BillCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiBillsPostAsync(BillCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Bills");
@@ -192,16 +198,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Bills3Async(int? id)
+        public System.Threading.Tasks.Task ApiBillsDeleteAsync(int? id)
         {
-            return Bills3Async(id, System.Threading.CancellationToken.None);
+            return ApiBillsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Bills3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiBillsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Bills?");
@@ -276,9 +282,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Bills4Async(int id)
+        public System.Threading.Tasks.Task<BillResponse> ApiBillsGetAsync(int id)
         {
-            return Bills4Async(id, System.Threading.CancellationToken.None);
+            return ApiBillsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -286,7 +292,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Bills4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<BillResponse> ApiBillsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -302,6 +308,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -324,7 +331,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<BillResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -359,16 +371,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ClinicsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicResponse>> ApiClinicsGetAsync()
         {
-            return ClinicsAsync(System.Threading.CancellationToken.None);
+            return ApiClinicsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ClinicsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicResponse>> ApiClinicsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Clinics");
@@ -380,6 +392,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -402,7 +415,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ClinicResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -428,9 +446,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Clinics2Async(ClinicCreateRequest body)
+        public System.Threading.Tasks.Task ApiClinicsPostAsync(ClinicCreateRequest body)
         {
-            return Clinics2Async(body, System.Threading.CancellationToken.None);
+            return ApiClinicsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -438,7 +456,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Clinics2Async(ClinicCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiClinicsPostAsync(ClinicCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Clinics");
@@ -500,16 +518,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Clinics3Async(int? id)
+        public System.Threading.Tasks.Task ApiClinicsDeleteAsync(int? id)
         {
-            return Clinics3Async(id, System.Threading.CancellationToken.None);
+            return ApiClinicsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Clinics3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiClinicsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Clinics?");
@@ -584,9 +602,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Clinics4Async(int id)
+        public System.Threading.Tasks.Task<ClinicResponse> ApiClinicsGetAsync(int id)
         {
-            return Clinics4Async(id, System.Threading.CancellationToken.None);
+            return ApiClinicsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -594,7 +612,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Clinics4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ClinicResponse> ApiClinicsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -610,6 +628,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -632,7 +651,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<ClinicResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -667,16 +691,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ClinicsTariffsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicTariffResponse>> ApiClinicstariffsGetAsync()
         {
-            return ClinicsTariffsAsync(System.Threading.CancellationToken.None);
+            return ApiClinicstariffsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ClinicsTariffsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicTariffResponse>> ApiClinicstariffsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ClinicsTariffs");
@@ -688,6 +712,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -710,7 +735,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ClinicTariffResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -736,9 +766,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ClinicsTariffs2Async(ClinicTariffCreateRequest body)
+        public System.Threading.Tasks.Task ApiClinicstariffsPostAsync(ClinicTariffCreateRequest body)
         {
-            return ClinicsTariffs2Async(body, System.Threading.CancellationToken.None);
+            return ApiClinicstariffsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -746,7 +776,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ClinicsTariffs2Async(ClinicTariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiClinicstariffsPostAsync(ClinicTariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ClinicsTariffs");
@@ -808,16 +838,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ClinicsTariffs3Async(int? id)
+        public System.Threading.Tasks.Task ApiClinicstariffsDeleteAsync(int? id)
         {
-            return ClinicsTariffs3Async(id, System.Threading.CancellationToken.None);
+            return ApiClinicstariffsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ClinicsTariffs3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiClinicstariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ClinicsTariffs?");
@@ -892,9 +922,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ClinicsTariffs4Async(int id)
+        public System.Threading.Tasks.Task<ClinicTariffResponse> ApiClinicstariffsGetAsync(int id)
         {
-            return ClinicsTariffs4Async(id, System.Threading.CancellationToken.None);
+            return ApiClinicstariffsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -902,7 +932,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ClinicsTariffs4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ClinicTariffResponse> ApiClinicstariffsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -918,6 +948,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -940,7 +971,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<ClinicTariffResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -975,16 +1011,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task DoctorsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DoctorResponse>> ApiDoctorsGetAsync()
         {
-            return DoctorsAsync(System.Threading.CancellationToken.None);
+            return ApiDoctorsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task DoctorsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DoctorResponse>> ApiDoctorsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Doctors");
@@ -996,6 +1032,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1018,7 +1055,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<DoctorResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1044,9 +1086,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Doctors2Async(DoctorCreateRequest body)
+        public System.Threading.Tasks.Task ApiDoctorsPostAsync(DoctorCreateRequest body)
         {
-            return Doctors2Async(body, System.Threading.CancellationToken.None);
+            return ApiDoctorsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1054,7 +1096,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Doctors2Async(DoctorCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiDoctorsPostAsync(DoctorCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Doctors");
@@ -1116,16 +1158,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Doctors3Async(int? id)
+        public System.Threading.Tasks.Task ApiDoctorsDeleteAsync(int? id)
         {
-            return Doctors3Async(id, System.Threading.CancellationToken.None);
+            return ApiDoctorsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Doctors3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiDoctorsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Doctors?");
@@ -1200,9 +1242,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Doctors4Async(int id)
+        public System.Threading.Tasks.Task<DoctorResponse> ApiDoctorsGetAsync(int id)
         {
-            return Doctors4Async(id, System.Threading.CancellationToken.None);
+            return ApiDoctorsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1210,7 +1252,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Doctors4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DoctorResponse> ApiDoctorsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1226,6 +1268,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1248,7 +1291,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<DoctorResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -1283,16 +1331,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task InspectionsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<InspectionResponse>> ApiInspectionsGetAsync()
         {
-            return InspectionsAsync(System.Threading.CancellationToken.None);
+            return ApiInspectionsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task InspectionsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<InspectionResponse>> ApiInspectionsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Inspections");
@@ -1304,6 +1352,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1326,7 +1375,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<InspectionResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1352,9 +1406,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Inspections2Async(InspectionCreateRequest body)
+        public System.Threading.Tasks.Task ApiInspectionsPostAsync(InspectionCreateRequest body)
         {
-            return Inspections2Async(body, System.Threading.CancellationToken.None);
+            return ApiInspectionsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1362,7 +1416,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Inspections2Async(InspectionCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiInspectionsPostAsync(InspectionCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Inspections");
@@ -1424,16 +1478,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Inspections3Async(int? id)
+        public System.Threading.Tasks.Task ApiInspectionsDeleteAsync(int? id)
         {
-            return Inspections3Async(id, System.Threading.CancellationToken.None);
+            return ApiInspectionsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Inspections3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiInspectionsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Inspections?");
@@ -1508,9 +1562,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Inspections4Async(int id)
+        public System.Threading.Tasks.Task<InspectionResponse> ApiInspectionsGetAsync(int id)
         {
-            return Inspections4Async(id, System.Threading.CancellationToken.None);
+            return ApiInspectionsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1518,7 +1572,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Inspections4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<InspectionResponse> ApiInspectionsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1534,6 +1588,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1556,7 +1611,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<InspectionResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -1591,16 +1651,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PatientsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PatientResponse>> ApiPatientsGetAsync()
         {
-            return PatientsAsync(System.Threading.CancellationToken.None);
+            return ApiPatientsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PatientsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PatientResponse>> ApiPatientsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Patients");
@@ -1612,6 +1672,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1634,7 +1695,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<PatientResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1660,9 +1726,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Patients2Async(PatientCreateRequest body)
+        public System.Threading.Tasks.Task ApiPatientsPostAsync(PatientCreateRequest body)
         {
-            return Patients2Async(body, System.Threading.CancellationToken.None);
+            return ApiPatientsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1670,7 +1736,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Patients2Async(PatientCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiPatientsPostAsync(PatientCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Patients");
@@ -1732,16 +1798,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Patients3Async(int? id)
+        public System.Threading.Tasks.Task ApiPatientsDeleteAsync(int? id)
         {
-            return Patients3Async(id, System.Threading.CancellationToken.None);
+            return ApiPatientsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Patients3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiPatientsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Patients?");
@@ -1816,9 +1882,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Patients4Async(int id)
+        public System.Threading.Tasks.Task<PatientResponse> ApiPatientsGetAsync(int id)
         {
-            return Patients4Async(id, System.Threading.CancellationToken.None);
+            return ApiPatientsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1826,7 +1892,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Patients4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PatientResponse> ApiPatientsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1842,6 +1908,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1864,7 +1931,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<PatientResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -1899,16 +1971,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PaymentsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentResponse>> ApiPaymentsGetAsync()
         {
-            return PaymentsAsync(System.Threading.CancellationToken.None);
+            return ApiPaymentsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PaymentsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentResponse>> ApiPaymentsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Payments");
@@ -1920,6 +1992,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -1942,7 +2015,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<PaymentResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1968,9 +2046,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Payments2Async(PaymentCreateRequest body)
+        public System.Threading.Tasks.Task ApiPaymentsPostAsync(PaymentCreateRequest body)
         {
-            return Payments2Async(body, System.Threading.CancellationToken.None);
+            return ApiPaymentsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1978,7 +2056,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Payments2Async(PaymentCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiPaymentsPostAsync(PaymentCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Payments");
@@ -2040,16 +2118,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Payments3Async(int? id)
+        public System.Threading.Tasks.Task ApiPaymentsDeleteAsync(int? id)
         {
-            return Payments3Async(id, System.Threading.CancellationToken.None);
+            return ApiPaymentsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Payments3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiPaymentsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Payments?");
@@ -2124,9 +2202,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Payments4Async(int id)
+        public System.Threading.Tasks.Task<PaymentResponse> ApiPaymentsGetAsync(int id)
         {
-            return Payments4Async(id, System.Threading.CancellationToken.None);
+            return ApiPaymentsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2134,7 +2212,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Payments4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PaymentResponse> ApiPaymentsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2150,6 +2228,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2172,7 +2251,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<PaymentResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -2207,16 +2291,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task ServicesAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ServiceResponse>> ApiServicesGetAsync()
         {
-            return ServicesAsync(System.Threading.CancellationToken.None);
+            return ApiServicesGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task ServicesAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ServiceResponse>> ApiServicesGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Services");
@@ -2228,6 +2312,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2250,7 +2335,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ServiceResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2276,9 +2366,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Services2Async(ServiceCreateRequest body)
+        public System.Threading.Tasks.Task ApiServicesPostAsync(ServiceCreateRequest body)
         {
-            return Services2Async(body, System.Threading.CancellationToken.None);
+            return ApiServicesPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2286,7 +2376,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Services2Async(ServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiServicesPostAsync(ServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Services");
@@ -2348,16 +2438,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Services3Async(int? id)
+        public System.Threading.Tasks.Task ApiServicesDeleteAsync(int? id)
         {
-            return Services3Async(id, System.Threading.CancellationToken.None);
+            return ApiServicesDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Services3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiServicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Services?");
@@ -2432,9 +2522,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Services4Async(int id)
+        public System.Threading.Tasks.Task<ServiceResponse> ApiServicesGetAsync(int id)
         {
-            return Services4Async(id, System.Threading.CancellationToken.None);
+            return ApiServicesGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2442,7 +2532,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Services4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ServiceResponse> ApiServicesGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2458,6 +2548,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2480,7 +2571,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<ServiceResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -2515,16 +2611,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TariffForServicesAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffForServiceResponse>> ApiTariffforservicesGetAsync()
         {
-            return TariffForServicesAsync(System.Threading.CancellationToken.None);
+            return ApiTariffforservicesGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TariffForServicesAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffForServiceResponse>> ApiTariffforservicesGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TariffForServices");
@@ -2536,6 +2632,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2558,7 +2655,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<TariffForServiceResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2584,9 +2686,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TariffForServices2Async(TariffForServiceCreateRequest body)
+        public System.Threading.Tasks.Task ApiTariffforservicesPostAsync(TariffForServiceCreateRequest body)
         {
-            return TariffForServices2Async(body, System.Threading.CancellationToken.None);
+            return ApiTariffforservicesPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2594,7 +2696,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TariffForServices2Async(TariffForServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTariffforservicesPostAsync(TariffForServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TariffForServices");
@@ -2656,16 +2758,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TariffForServices3Async(int? id)
+        public System.Threading.Tasks.Task ApiTariffforservicesDeleteAsync(int? id)
         {
-            return TariffForServices3Async(id, System.Threading.CancellationToken.None);
+            return ApiTariffforservicesDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TariffForServices3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTariffforservicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TariffForServices?");
@@ -2740,9 +2842,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TariffForServices4Async(int id)
+        public System.Threading.Tasks.Task<TariffForServiceResponse> ApiTariffforservicesGetAsync(int id)
         {
-            return TariffForServices4Async(id, System.Threading.CancellationToken.None);
+            return ApiTariffforservicesGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2750,7 +2852,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TariffForServices4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TariffForServiceResponse> ApiTariffforservicesGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2766,6 +2868,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2788,7 +2891,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<TariffForServiceResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -2823,16 +2931,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TariffsAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffResponse>> ApiTariffsGetAsync()
         {
-            return TariffsAsync(System.Threading.CancellationToken.None);
+            return ApiTariffsGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TariffsAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffResponse>> ApiTariffsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Tariffs");
@@ -2844,6 +2952,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -2866,7 +2975,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<TariffResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2892,9 +3006,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Tariffs2Async(TariffCreateRequest body)
+        public System.Threading.Tasks.Task ApiTariffsPostAsync(TariffCreateRequest body)
         {
-            return Tariffs2Async(body, System.Threading.CancellationToken.None);
+            return ApiTariffsPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2902,7 +3016,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Tariffs2Async(TariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTariffsPostAsync(TariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Tariffs");
@@ -2964,16 +3078,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Tariffs3Async(int? id)
+        public System.Threading.Tasks.Task ApiTariffsDeleteAsync(int? id)
         {
-            return Tariffs3Async(id, System.Threading.CancellationToken.None);
+            return ApiTariffsDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Tariffs3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Tariffs?");
@@ -3048,9 +3162,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Tariffs4Async(int id)
+        public System.Threading.Tasks.Task<TariffResponse> ApiTariffsGetAsync(int id)
         {
-            return Tariffs4Async(id, System.Threading.CancellationToken.None);
+            return ApiTariffsGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3058,7 +3172,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Tariffs4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TariffResponse> ApiTariffsGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3074,6 +3188,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3096,7 +3211,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<TariffResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -3131,16 +3251,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TransactionsLeftoversAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>> ApiTransactionsleftoversGetAsync()
         {
-            return TransactionsLeftoversAsync(System.Threading.CancellationToken.None);
+            return ApiTransactionsleftoversGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TransactionsLeftoversAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>> ApiTransactionsleftoversGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TransactionsLeftovers");
@@ -3152,6 +3272,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3174,7 +3295,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3200,9 +3326,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TransactionsLeftovers2Async(TransactionsLeftoversCreateRequest body)
+        public System.Threading.Tasks.Task ApiTransactionsleftoversPostAsync(TransactionsLeftoversCreateRequest body)
         {
-            return TransactionsLeftovers2Async(body, System.Threading.CancellationToken.None);
+            return ApiTransactionsleftoversPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3210,7 +3336,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TransactionsLeftovers2Async(TransactionsLeftoversCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTransactionsleftoversPostAsync(TransactionsLeftoversCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TransactionsLeftovers");
@@ -3272,16 +3398,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TransactionsLeftovers3Async(int? id)
+        public System.Threading.Tasks.Task ApiTransactionsleftoversDeleteAsync(int? id)
         {
-            return TransactionsLeftovers3Async(id, System.Threading.CancellationToken.None);
+            return ApiTransactionsleftoversDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TransactionsLeftovers3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiTransactionsleftoversDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TransactionsLeftovers?");
@@ -3356,9 +3482,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task TransactionsLeftovers4Async(int id)
+        public System.Threading.Tasks.Task<TransactionsLeftoversResponse> ApiTransactionsleftoversGetAsync(int id)
         {
-            return TransactionsLeftovers4Async(id, System.Threading.CancellationToken.None);
+            return ApiTransactionsleftoversGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3366,7 +3492,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task TransactionsLeftovers4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TransactionsLeftoversResponse> ApiTransactionsleftoversGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3382,6 +3508,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3404,7 +3531,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<TransactionsLeftoversResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -3439,16 +3571,16 @@ namespace MriApi
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UsersAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserResponse>> ApiUsersGetAsync()
         {
-            return UsersAsync(System.Threading.CancellationToken.None);
+            return ApiUsersGetAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Получить список</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UsersAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserResponse>> ApiUsersGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Users");
@@ -3460,6 +3592,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3482,7 +3615,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<UserResponse>>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -3508,9 +3646,9 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Users2Async(UserCreateRequest body)
+        public System.Threading.Tasks.Task ApiUsersPostAsync(UserCreateRequest body)
         {
-            return Users2Async(body, System.Threading.CancellationToken.None);
+            return ApiUsersPostAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3518,7 +3656,7 @@ namespace MriApi
         /// <param name="body">Ресурс</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Users2Async(UserCreateRequest body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiUsersPostAsync(UserCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Users");
@@ -3580,16 +3718,16 @@ namespace MriApi
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Users3Async(int? id)
+        public System.Threading.Tasks.Task ApiUsersDeleteAsync(int? id)
         {
-            return Users3Async(id, System.Threading.CancellationToken.None);
+            return ApiUsersDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Удалить ресурс по идентификатору</summary>
         /// <returns>Ресурс успешно удален</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Users3Async(int? id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task ApiUsersDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Users?");
@@ -3664,9 +3802,9 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Users4Async(int id)
+        public System.Threading.Tasks.Task<UserResponse> ApiUsersGetAsync(int id)
         {
-            return Users4Async(id, System.Threading.CancellationToken.None);
+            return ApiUsersGetAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3674,7 +3812,7 @@ namespace MriApi
         /// <param name="id">Идентификатор</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Users4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<UserResponse> ApiUsersGetAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3690,6 +3828,7 @@ namespace MriApi
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
@@ -3712,7 +3851,12 @@ namespace MriApi
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<UserResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 404)
@@ -3847,6 +3991,36 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class BillResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BillNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("billDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset BillDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("paymentDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset PaymentDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isPayed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsPayed { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("statusDescription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StatusDescription { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("billStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BillStatus { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class BillCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("billNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3904,6 +4078,30 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ClinicResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("contactAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ContactAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("phone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Phone { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bik", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Bik { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Inn { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ClinicCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3925,6 +4123,24 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ClinicTariffResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tariffId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TariffId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dateStart", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset DateStart { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dateEnd", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset DateEnd { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ClinicTariffCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3938,6 +4154,33 @@ namespace MriApi
 
         [Newtonsoft.Json.JsonProperty("dateEnd", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset DateEnd { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class DoctorResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("clinicId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ClinicId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UserId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("surname", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Surname { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("patronymic", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Patronymic { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("phone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Phone { get; set; }
 
 
     }
@@ -3967,6 +4210,24 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class InspectionResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("patientId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PatientId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inspectionDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset InspectionDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("mriId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int MriId { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class InspectionCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("patientId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3982,6 +4243,21 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class PatientResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("doctorId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int DoctorId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cardNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CardNumber { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class PatientCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("doctorId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3989,6 +4265,33 @@ namespace MriApi
 
         [Newtonsoft.Json.JsonProperty("cardNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CardNumber { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class PaymentResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("purpose", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Purpose { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bik", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Bik { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Inn { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("clinicId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ClinicId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("operationStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int OperationStatus { get; set; }
 
 
     }
@@ -4018,6 +4321,24 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ServiceResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Description { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("priceForTransaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double PriceForTransaction { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ServiceCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4033,6 +4354,24 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TariffForServiceResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tariffId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TariffId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("serviceId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ServiceId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("transactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TransactionsCount { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class TariffForServiceCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("tariffId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4043,6 +4382,33 @@ namespace MriApi
 
         [Newtonsoft.Json.JsonProperty("transactionsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int TransactionsCount { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TariffResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("requestsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long RequestsCount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Price { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isEnabled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsEnabled { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Description { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("duration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Duration { get; set; }
 
 
     }
@@ -4072,6 +4438,24 @@ namespace MriApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TransactionsLeftoversResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("clinicId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ClinicId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("serviceId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ServiceId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("transactionsLeft", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TransactionsLeft { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class TransactionsLeftoversCreateRequest
     {
         [Newtonsoft.Json.JsonProperty("clinicId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4082,6 +4466,33 @@ namespace MriApi
 
         [Newtonsoft.Json.JsonProperty("transactionsLeft", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int TransactionsLeft { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.26.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class UserResponse
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("login", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Login { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Password { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset CreationDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastLoginDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset LastLoginDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isLockedOut", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsLockedOut { get; set; }
 
 
     }
