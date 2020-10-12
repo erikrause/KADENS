@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,9 +26,14 @@ namespace IdentityServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             var builder = services.AddIdentityServer()
+                                    .AddInMemoryIdentityResources(Config.IdentityResources)
                                     .AddInMemoryApiScopes(Config.ApiScopes)
-                                    .AddInMemoryClients(Config.Clients);
+                                    .AddInMemoryClients(Config.Clients)
+                                    .AddTestUsers(TestUsers.Users);
+            builder.AddDeveloperSigningCredential();
+
             services.AddControllers();
         }
 
@@ -39,15 +45,15 @@ namespace IdentityServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

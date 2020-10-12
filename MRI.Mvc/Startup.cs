@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MriApi;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Logging;
 
 namespace MRI.Mvc
 {
@@ -28,23 +30,43 @@ namespace MRI.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //IdentityModelEventSource.ShowPII = true;    // DEBUG
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("Postgres")));
-            services.AddDefaultIdentity<IdentityUser<int>>(options => 
+            /*services.AddDefaultIdentity<IdentityUser<int>>(options => 
             { 
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddAuthentication().AddGoogle(options =>
+            /*services.AddAuthentication().AddGoogle(options =>
             {
                 options.ClientId = "402748804532-igldkrb545os0sfqm5la83e0fr4rq0no.apps.googleusercontent.com";
                 options.ClientSecret = "KvEarGbj2LxurHKF5kol0GA1";
+            });*/
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "https://localhost:6001";
+
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.SaveTokens = true;
             });
 
             services.AddSingleton(new Client(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));
@@ -76,7 +98,8 @@ namespace MRI.Mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}")
+                         .RequireAuthorization();
                 endpoints.MapRazorPages();
             });
         }
