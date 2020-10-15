@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+//using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRI.Domain.Entities;
-using MRI.OpenApi.Controllers.Abstract;
-using MRI.OpenApi.Models.Request;
-using MRI.OpenApi.Models.Response;
+using ProbOauthApi.Controllers.Abstract;
+using ProbOauthApi.Models.Request;
+using ProbOauthApi.Models.Response;
 using MRI.OutgoingPorts;
-using MRI.PostgresRepository;
 
-namespace MRI.OpenApi.Controllers
+namespace ProbOauthApi.Controllers
 {
     /// <summary>
     /// Контроллер чеков

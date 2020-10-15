@@ -32,6 +32,7 @@ namespace IdentityServer
             var builder = services.AddIdentityServer()
                                     .AddInMemoryIdentityResources(Config.IdentityResources)
                                     .AddInMemoryApiScopes(Config.ApiScopes)
+                                    .AddInMemoryApiResources(Config.ApiResources)
                                     .AddInMemoryClients(Config.Clients)
                                     .AddTestUsers(TestUsers.Users);
 

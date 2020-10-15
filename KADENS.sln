@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Mvc", "MRI.Mvc\MRI.Mvc.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{18915DBC-8D77-447C-AA8C-355BB38A321A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Services\Identity\IdentityServer\IdentityServer.csproj", "{9600C337-F571-4CBB-991B-B7BFDF85F90A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "Services\Identity\IdentityServer\IdentityServer.csproj", "{9600C337-F571-4CBB-991B-B7BFDF85F90A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbOauthApi", "ProbOauthApi\ProbOauthApi.csproj", "{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{9600C337-F571-4CBB-991B-B7BFDF85F90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9600C337-F571-4CBB-991B-B7BFDF85F90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9600C337-F571-4CBB-991B-B7BFDF85F90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{EBE1E32B-D043-445A-AAFA-F084CE9695FB} = {5F36AA63-E60E-427D-908D-1685F950633B}
 		{18915DBC-8D77-447C-AA8C-355BB38A321A} = {6CC94A56-3F11-46ED-8097-811B78AF122C}
 		{9600C337-F571-4CBB-991B-B7BFDF85F90A} = {18915DBC-8D77-447C-AA8C-355BB38A321A}
+		{F3093C68-A1EE-4EE6-AEC2-3AEE755A9E27} = {5F36AA63-E60E-427D-908D-1685F950633B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3409167-88C1-46F8-8774-C7E0FDEE4690}

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MRI.Mvc.Models;
+using Newtonsoft.Json.Linq;
 
 namespace MRI.Mvc.Controllers
 {
@@ -19,9 +23,17 @@ namespace MRI.Mvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //return View();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var content = await client.GetStringAsync("https://localhost:6001/identity");
+
+            ViewBag.Json = JArray.Parse(content).ToString();
+            return View("json");
         }
 
         public IActionResult Privacy()

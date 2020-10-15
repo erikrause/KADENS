@@ -7,13 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using MRI.Domain.Entities.Abstract;
-using Swashbuckle.AspNetCore.Annotations;
-using MRI.OpenApi.Models.Abstract;
+//using Swashbuckle.AspNetCore.Annotations;
+using ProbOauthApi.Models.Abstract;
 using MRI.Domain.Entities;
-using MRI.OpenApi.Models.Response;
+using ProbOauthApi.Models.Response;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MRI.OpenApi.Controllers.Abstract
+namespace ProbOauthApi.Controllers.Abstract
 {
     [Authorize]
     [ApiController]

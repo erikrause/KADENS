@@ -70,6 +70,9 @@ namespace MRI.Mvc
                 options.GetClaimsFromUserInfoEndpoint = true;
 
                 options.SaveTokens = true;
+
+                options.Scope.Add("mri");
+                //options.Scope.Add("offline_access");
             });
 
             services.AddSingleton(new Client(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));

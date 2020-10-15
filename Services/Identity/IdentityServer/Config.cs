@@ -14,6 +14,11 @@ namespace IdentityServer
             {
                 new ApiScope("mri", "MRI API")
             };
+        public static IEnumerable<ApiResource> ApiResources =>
+            new[]
+            {
+                        new ApiResource("mri", "API #1") {Scopes = {"mri"}}
+            };
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
@@ -51,7 +56,33 @@ namespace IdentityServer
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "mri"
+                }
+            },
+            // swaggerUI client
+            new Client
+            {
+                ClientId = "swaggerUI",
+                ClientSecrets = { new Secret("secret".Sha256()) },
+
+                AllowedGrantTypes = GrantTypes.Code,
+
+                // where to redirect to after login
+                RedirectUris = { "https://localhost:44302/swagger/oauth2-redirect.html" },
+
+                // where to redirect to after logout
+                PostLogoutRedirectUris = { "https://localhost:44302/swagger/" },
+
+                AllowedCorsOrigins = { "https://localhost:44302" },
+
+                AllowAccessTokensViaBrowser = true,
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "mri"
                 }
             }
         };
