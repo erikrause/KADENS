@@ -35,12 +35,12 @@ namespace MRI.OpenApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Getting connection string.
-            var configurationBuilder = new ConfigurationBuilder()
+            /*var configurationBuilder = new ConfigurationBuilder()
               .SetBasePath(Directory.GetCurrentDirectory())
               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            IConfigurationRoot configuration = configurationBuilder.Build();
-            string connectionString = configuration.GetConnectionString("Postgres");
+            IConfigurationRoot configuration = configurationBuilder.Build();*/
+            string connectionString = Configuration.GetConnectionString("Postgres");
             //
 
             services.AddDbContext<MriDbContext>(opt => opt.UseNpgsql(connectionString));

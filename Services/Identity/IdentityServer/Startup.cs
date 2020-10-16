@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IdentityServer
 {
@@ -29,12 +31,25 @@ namespace IdentityServer
         {
             services.AddControllersWithViews();
 
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            string connectionString = Configuration.GetConnectionString("Postgres");
+
             var builder = services.AddIdentityServer()
-                                    .AddInMemoryIdentityResources(Config.IdentityResources)
-                                    .AddInMemoryApiScopes(Config.ApiScopes)
-                                    .AddInMemoryApiResources(Config.ApiResources)
-                                    .AddInMemoryClients(Config.Clients)
-                                    .AddTestUsers(TestUsers.Users);
+                //.AddInMemoryIdentityResources(Config.IdentityResources)
+                //.AddInMemoryApiScopes(Config.ApiScopes)
+                //.AddInMemoryApiResources(Config.ApiResources)
+                //.AddInMemoryClients(Config.Clients)
+                .AddTestUsers(TestUsers.Users)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                    .AddOperationalStore(options =>
+                    {
+                        options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                    });
 
             builder.AddDeveloperSigningCredential();
 
