@@ -22,7 +22,6 @@ namespace MRI.OpenApi.Controllers
     /// Контроллер чеков
     /// </summary>
     [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
     public class BillsController : CrudController<Bill, BillCreateRequest, BillResponse>
     {

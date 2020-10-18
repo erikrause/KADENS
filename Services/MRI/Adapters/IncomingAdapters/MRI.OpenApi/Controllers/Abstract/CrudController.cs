@@ -17,6 +17,7 @@ namespace MRI.OpenApi.Controllers.Abstract
 {
     [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public abstract class CrudController<TEntity, TEntityCreateRequest, TEntityResponse> : ControllerBase
         where TEntity : Entity
         where TEntityCreateRequest : class

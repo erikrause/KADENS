@@ -16,7 +16,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace MRI.OpenApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class ClinicsController : CrudController<Clinic, ClinicCreateRequest, ClinicResponse>
     {

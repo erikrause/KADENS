@@ -16,7 +16,6 @@ namespace MRI.OpenApi.Controllers
     /// <summary>
     /// Контроллер счетов
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     public class PaymentsController : CrudController<Payment, PaymentCreateRequest, PaymentResponse>
     {

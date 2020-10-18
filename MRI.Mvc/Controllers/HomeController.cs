@@ -25,15 +25,7 @@ namespace MRI.Mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //return View();
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync("https://localhost:6001/identity");
-
-            ViewBag.Json = JArray.Parse(content).ToString();
-            return View("json");
+            return View();
         }
 
         public IActionResult Privacy()

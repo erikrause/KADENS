@@ -6,20 +6,27 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MRI.Mvc.Infrastructure;
 using MriApi;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MRI.Mvc.Controllers
 {
     public class ClinicsController : Controller
     {
-        readonly Client _client;
-        public ClinicsController(Client client)
+        public ClinicsController()
         {
-            _client = client;
         }
         // GET: ClinicsController
         public async Task<ActionResult> Index()
         {
-            var clinics = await _client.ApiClinicsGetAsync();
+            //var clinics = await _client.ApiClinicsGetAsync();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var httpClient = new System.Net.Http.HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var apiClient = new MriApiClient("https://localhost:44302/", httpClient);
+            var clinics = await apiClient.ClinicsGetAsync();
             return View(clinics);
         }
 

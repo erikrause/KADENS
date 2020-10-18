@@ -14,9 +14,9 @@ namespace MRI.Mvc.Infrastructure
         {
             _configuration = configuration;
         }
-        public Client CreateClient()
+        public MriApiClient CreateClient()
         {
-            return new Client(_configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient());
+            return new MriApiClient(_configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient());
         }
     }
 }

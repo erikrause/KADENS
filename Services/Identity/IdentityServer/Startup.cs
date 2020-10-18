@@ -31,16 +31,16 @@ namespace IdentityServer
         {
             services.AddControllersWithViews();
 
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            string connectionString = Configuration.GetConnectionString("Postgres");
+            /*var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            string connectionString = Configuration.GetConnectionString("Postgres");*/
 
             var builder = services.AddIdentityServer()
-                //.AddInMemoryIdentityResources(Config.IdentityResources)
-                //.AddInMemoryApiScopes(Config.ApiScopes)
-                //.AddInMemoryApiResources(Config.ApiResources)
-                //.AddInMemoryClients(Config.Clients)
-                .AddTestUsers(TestUsers.Users)
-                .AddConfigurationStore(options =>
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryApiResources(Config.ApiResources)
+                .AddInMemoryClients(Config.Clients)
+                .AddTestUsers(TestUsers.Users);
+                /*.AddConfigurationStore(options =>
                 {
                     options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
                         sql => sql.MigrationsAssembly(migrationsAssembly));
@@ -49,7 +49,7 @@ namespace IdentityServer
                     {
                         options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
                             sql => sql.MigrationsAssembly(migrationsAssembly));
-                    });
+                    });*/
 
             builder.AddDeveloperSigningCredential();
 

@@ -12,7 +12,6 @@ using MRI.OutgoingPorts;
 
 namespace MRI.OpenApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class ClinicsTariffsController : CrudController<ClinicTariff, ClinicTariffCreateRequest, ClinicTariffResponse>
     {

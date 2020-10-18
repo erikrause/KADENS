@@ -10,8 +10,8 @@ namespace MRI.Mvc.Controllers
 {
     public class InspectionsController : Controller
     {
-        readonly Client _client;
-        public InspectionsController(Client client)
+        readonly MriApiClient _client;
+        public InspectionsController(MriApiClient client)
         {
             _client = client;
         }
@@ -19,13 +19,13 @@ namespace MRI.Mvc.Controllers
         // GET: InspectionsController
         public async Task<ActionResult> Index()
         {
-            return View(await _client.ApiInspectionsGetAsync());
+            return View(await _client.InspectionsGetAsync());
         }
 
         // GET: InspectionsController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View(await _client.ApiInspectionsGetAsync(id));
+            return View(await _client.InspectionsGetAsync(id));
         }
 
         // GET: InspectionsController/Create
@@ -52,7 +52,7 @@ namespace MRI.Mvc.Controllers
         // GET: InspectionsController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            return View(await _client.ApiInspectionsGetAsync(id));
+            return View(await _client.InspectionsGetAsync(id));
         }
 
         // POST: InspectionsController/Edit/5

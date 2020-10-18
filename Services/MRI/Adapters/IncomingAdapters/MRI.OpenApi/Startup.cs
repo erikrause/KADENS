@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using MRI.OpenApi.Filters;
 using MRI.OutgoingPorts;
 using MRI.PostgresRepository;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace MRI.OpenApi
 {
@@ -67,38 +68,40 @@ namespace MRI.OpenApi
                         Email = "erkimkamilov@gmail.com"
                     }
                 });
-            /*
-            c.AddSecurityDefinition("BearerAuth", new OpenApiSecurityScheme
-            {
-                Scheme = "bearer",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
-                //OpenIdConnectUrl = new Uri("https://localhost:6001")
-            });*/
-            /*
-            c.AddSecurityDefinition("Oauth2", new OpenApiSecurityScheme
-            {
-                Type = SecuritySchemeType.OAuth2,
-                Flows = new OpenApiOAuthFlows()
+
+                //c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
+                /*
+                c.AddSecurityDefinition("BearerAuth", new OpenApiSecurityScheme
                 {
-                    Implicit = new OpenApiOAuthFlow()
+                    Scheme = "bearer",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    //OpenIdConnectUrl = new Uri("https://localhost:6001")
+                });*/
+                /*
+                c.AddSecurityDefinition("Oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows()
                     {
-                        AuthorizationUrl = new Uri("https://localhost:6001/connect/authorize"),
-                        TokenUrl = new Uri("https://localhost:6001/connect/token"),
-                        Scopes = new Dictionary<string, string>()
+                        Implicit = new OpenApiOAuthFlow()
                         {
-                            { "mri", "Mri API" }
+                            AuthorizationUrl = new Uri("https://localhost:6001/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:6001/connect/token"),
+                            Scopes = new Dictionary<string, string>()
+                            {
+                                { "mri", "Mri API" }
+                            }
                         }
                     }
-                }
-            });*/
-            /*
-            c.AddSecurityDefinition("OpenID", new OpenApiSecurityScheme()
-            {
-                Type = SecuritySchemeType.OpenIdConnect,
-                OpenIdConnectUrl = new Uri("https://localhost:6001")
-            });*/
+                });*/
+                /*
+                c.AddSecurityDefinition("OpenID", new OpenApiSecurityScheme()
+                {
+                    Type = SecuritySchemeType.OpenIdConnect,
+                    OpenIdConnectUrl = new Uri("https://localhost:6001")
+                });*/
 
                 c.AddSecurityDefinition("Oauth2", new OpenApiSecurityScheme()
                 {
@@ -151,6 +154,7 @@ namespace MRI.OpenApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
 
             app.UseAuthentication();
             app.UseAuthorization();
