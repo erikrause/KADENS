@@ -82,12 +82,12 @@ namespace MRI.Mvc
 
             services.AddHeaderPropagation(options =>
             {
-                options.Headers.Add("Authorization");
-                options.Headers.Add("Cookie", context =>
+                options.Headers.Add("Authorization", context =>
                 {
                     //var accessToken = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "access-token")?.Value;
+                    //return accessToken != null ? new StringValues($"token={accessToken}") : new StringValues();
                     var accessToken = (context.HttpContext.GetTokenAsync("access_token")).Result;
-                    return accessToken != null ? new StringValues($"token={accessToken}") : new StringValues();
+                    return "Bearer " + accessToken;
                 });
             });
 
@@ -96,10 +96,7 @@ namespace MRI.Mvc
             {
                 c.BaseAddress = new Uri(Configuration.GetSection("ApiUrl").GetSection("Mri").Value);
                 //c.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.GetTokenAsync())
-            }).AddHeaderPropagation(c =>
-            {
-                c.Headers.Add("Cookie");
-            });
+            }).AddHeaderPropagation();
             //services.AddHttpClient()
         }
 
@@ -118,6 +115,7 @@ namespace MRI.Mvc
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseHeaderPropagation();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -125,41 +123,14 @@ namespace MRI.Mvc
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseHeaderPropagation();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}")
-                         .RequireAuthorization();
+                         .RequireAuthorization();   // TODO delete?
                 endpoints.MapRazorPages();
             });
         }
     }
-    public class Prob : IHttpClientFactory
-    {
-        public HttpClient CreateClient(string name)
-        {
-            throw new NotImplementedException();
-        }
-    }/*
-    public class AuthenticationDelegatingHandler : DelegatingHandler
-    {
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            var token = await GetToken();
-            request.Headers.Authorization = new AuthenticationHeaderValue(token.Scheme, token.AccessToken);
-            var response = await base.SendAsync(request, cancellationToken);
-
-            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
-            {
-                token = await RefreshToken();
-                request.Headers.Authorization = new AuthenticationHeaderValue(token.Scheme, token.AccessToken);
-                response = await base.SendAsync(request, cancellationToken);
-            }
-
-            return response;
-        }
-    }*/
 }
