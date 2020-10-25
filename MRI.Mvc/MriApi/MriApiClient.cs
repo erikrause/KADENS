@@ -15,15 +15,603 @@ namespace MriApi
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.7.4.0 (NJsonSchema v10.1.26.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial class MriApiClient
+    public partial interface IMriApiClient
     {
-        private string _baseUrl = "";
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BillResponse>> BillsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BillResponse>> BillsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task BillsPostAsync(BillCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task BillsPostAsync(BillCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task BillsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task BillsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<BillResponse> BillsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<BillResponse> BillsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicResponse>> ClinicsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicResponse>> ClinicsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicsPostAsync(ClinicCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicsPostAsync(ClinicCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ClinicResponse> ClinicsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ClinicResponse> ClinicsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicTariffResponse>> ClinicstariffsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicTariffResponse>> ClinicstariffsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicstariffsPostAsync(ClinicTariffCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicstariffsPostAsync(ClinicTariffCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicstariffsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ClinicstariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ClinicTariffResponse> ClinicstariffsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ClinicTariffResponse> ClinicstariffsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DoctorResponse>> DoctorsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DoctorResponse>> DoctorsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task DoctorsPostAsync(DoctorCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task DoctorsPostAsync(DoctorCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task DoctorsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task DoctorsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<DoctorResponse> DoctorsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<DoctorResponse> DoctorsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<InspectionResponse>> InspectionsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<InspectionResponse>> InspectionsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task InspectionsPostAsync(InspectionCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task InspectionsPostAsync(InspectionCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task InspectionsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task InspectionsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<InspectionResponse> InspectionsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<InspectionResponse> InspectionsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PatientResponse>> PatientsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PatientResponse>> PatientsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PatientsPostAsync(PatientCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PatientsPostAsync(PatientCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PatientsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PatientsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<PatientResponse> PatientsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<PatientResponse> PatientsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentResponse>> PaymentsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentResponse>> PaymentsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PaymentsPostAsync(PaymentCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PaymentsPostAsync(PaymentCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PaymentsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task PaymentsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<PaymentResponse> PaymentsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<PaymentResponse> PaymentsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ServiceResponse>> ServicesGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ServiceResponse>> ServicesGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ServicesPostAsync(ServiceCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ServicesPostAsync(ServiceCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ServicesDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task ServicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ServiceResponse> ServicesGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<ServiceResponse> ServicesGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffForServiceResponse>> TariffforservicesGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffForServiceResponse>> TariffforservicesGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffforservicesPostAsync(TariffForServiceCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffforservicesPostAsync(TariffForServiceCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffforservicesDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffforservicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TariffForServiceResponse> TariffforservicesGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TariffForServiceResponse> TariffforservicesGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffResponse>> TariffsGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffResponse>> TariffsGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffsPostAsync(TariffCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffsPostAsync(TariffCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffsDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TariffResponse> TariffsGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TariffResponse> TariffsGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>> TransactionsleftoversGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>> TransactionsleftoversGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TransactionsleftoversPostAsync(TransactionsLeftoversCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TransactionsleftoversPostAsync(TransactionsLeftoversCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TransactionsleftoversDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task TransactionsleftoversDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TransactionsLeftoversResponse> TransactionsleftoversGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<TransactionsLeftoversResponse> TransactionsleftoversGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserResponse>> UsersGetAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить список</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserResponse>> UsersGetAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UsersPostAsync(UserCreateRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Создать ресурс</summary>
+        /// <param name="body">Ресурс</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UsersPostAsync(UserCreateRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UsersDeleteAsync(int? id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Удалить ресурс по идентификатору</summary>
+        /// <returns>Ресурс успешно удален</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UsersDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
+
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<UserResponse> UsersGetAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Получить ресурс по идентификатору</summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<UserResponse> UsersGetAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecast>> WeatherforecastAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecast>> WeatherforecastAsync(System.Threading.CancellationToken cancellationToken);
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.7.4.0 (NJsonSchema v10.1.26.0 (Newtonsoft.Json v12.0.0.0))")]
+    public partial class MriApiClient : IMriApiClient
+    {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public MriApiClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public MriApiClient(System.Net.Http.HttpClient httpClient)
         {
-            BaseUrl = baseUrl;
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         }
@@ -33,12 +621,6 @@ namespace MriApi
             var settings = new Newtonsoft.Json.JsonSerializerSettings();
             UpdateJsonSerializerSettings(settings);
             return settings;
-        }
-
-        public string BaseUrl
-        {
-            get { return _baseUrl; }
-            set { _baseUrl = value; }
         }
 
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
@@ -63,7 +645,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BillResponse>> BillsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Bills");
+            urlBuilder_.Append("Bills");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -151,7 +733,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task BillsPostAsync(BillCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Bills");
+            urlBuilder_.Append("Bills");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -234,7 +816,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task BillsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Bills?");
+            urlBuilder_.Append("Bills?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -334,7 +916,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Bills/{id}");
+            urlBuilder_.Append("Bills/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -431,7 +1013,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicResponse>> ClinicsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Clinics");
+            urlBuilder_.Append("Clinics");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -519,7 +1101,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ClinicsPostAsync(ClinicCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Clinics");
+            urlBuilder_.Append("Clinics");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -602,7 +1184,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ClinicsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Clinics?");
+            urlBuilder_.Append("Clinics?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -702,7 +1284,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Clinics/{id}");
+            urlBuilder_.Append("Clinics/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -799,7 +1381,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ClinicTariffResponse>> ClinicstariffsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/ClinicsTariffs");
+            urlBuilder_.Append("ClinicsTariffs");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -887,7 +1469,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ClinicstariffsPostAsync(ClinicTariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/ClinicsTariffs");
+            urlBuilder_.Append("ClinicsTariffs");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -970,7 +1552,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ClinicstariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/ClinicsTariffs?");
+            urlBuilder_.Append("ClinicsTariffs?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -1070,7 +1652,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/ClinicsTariffs/{id}");
+            urlBuilder_.Append("ClinicsTariffs/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -1167,7 +1749,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DoctorResponse>> DoctorsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Doctors");
+            urlBuilder_.Append("Doctors");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1255,7 +1837,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task DoctorsPostAsync(DoctorCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Doctors");
+            urlBuilder_.Append("Doctors");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1338,7 +1920,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task DoctorsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Doctors?");
+            urlBuilder_.Append("Doctors?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -1438,7 +2020,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Doctors/{id}");
+            urlBuilder_.Append("Doctors/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -1535,7 +2117,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<InspectionResponse>> InspectionsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Inspections");
+            urlBuilder_.Append("Inspections");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1623,7 +2205,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task InspectionsPostAsync(InspectionCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Inspections");
+            urlBuilder_.Append("Inspections");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1706,7 +2288,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task InspectionsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Inspections?");
+            urlBuilder_.Append("Inspections?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -1806,7 +2388,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Inspections/{id}");
+            urlBuilder_.Append("Inspections/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -1903,7 +2485,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PatientResponse>> PatientsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Patients");
+            urlBuilder_.Append("Patients");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1991,7 +2573,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task PatientsPostAsync(PatientCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Patients");
+            urlBuilder_.Append("Patients");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2074,7 +2656,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task PatientsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Patients?");
+            urlBuilder_.Append("Patients?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -2174,7 +2756,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Patients/{id}");
+            urlBuilder_.Append("Patients/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -2271,7 +2853,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentResponse>> PaymentsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Payments");
+            urlBuilder_.Append("Payments");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2359,7 +2941,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task PaymentsPostAsync(PaymentCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Payments");
+            urlBuilder_.Append("Payments");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2442,7 +3024,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task PaymentsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Payments?");
+            urlBuilder_.Append("Payments?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -2542,7 +3124,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Payments/{id}");
+            urlBuilder_.Append("Payments/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -2639,7 +3221,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ServiceResponse>> ServicesGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Services");
+            urlBuilder_.Append("Services");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2727,7 +3309,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ServicesPostAsync(ServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Services");
+            urlBuilder_.Append("Services");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2810,7 +3392,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task ServicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Services?");
+            urlBuilder_.Append("Services?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -2910,7 +3492,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Services/{id}");
+            urlBuilder_.Append("Services/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -3007,7 +3589,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffForServiceResponse>> TariffforservicesGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TariffForServices");
+            urlBuilder_.Append("TariffForServices");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3095,7 +3677,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TariffforservicesPostAsync(TariffForServiceCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TariffForServices");
+            urlBuilder_.Append("TariffForServices");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3178,7 +3760,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TariffforservicesDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TariffForServices?");
+            urlBuilder_.Append("TariffForServices?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -3278,7 +3860,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TariffForServices/{id}");
+            urlBuilder_.Append("TariffForServices/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -3375,7 +3957,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TariffResponse>> TariffsGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Tariffs");
+            urlBuilder_.Append("Tariffs");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3463,7 +4045,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TariffsPostAsync(TariffCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Tariffs");
+            urlBuilder_.Append("Tariffs");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3546,7 +4128,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TariffsDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Tariffs?");
+            urlBuilder_.Append("Tariffs?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -3646,7 +4228,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Tariffs/{id}");
+            urlBuilder_.Append("Tariffs/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -3743,7 +4325,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionsLeftoversResponse>> TransactionsleftoversGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TransactionsLeftovers");
+            urlBuilder_.Append("TransactionsLeftovers");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3831,7 +4413,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TransactionsleftoversPostAsync(TransactionsLeftoversCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TransactionsLeftovers");
+            urlBuilder_.Append("TransactionsLeftovers");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3914,7 +4496,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task TransactionsleftoversDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TransactionsLeftovers?");
+            urlBuilder_.Append("TransactionsLeftovers?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -4014,7 +4596,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/TransactionsLeftovers/{id}");
+            urlBuilder_.Append("TransactionsLeftovers/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -4111,7 +4693,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserResponse>> UsersGetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Users");
+            urlBuilder_.Append("Users");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -4199,7 +4781,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task UsersPostAsync(UserCreateRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Users");
+            urlBuilder_.Append("Users");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -4282,7 +4864,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task UsersDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Users?");
+            urlBuilder_.Append("Users?");
             if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -4382,7 +4964,7 @@ namespace MriApi
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Users/{id}");
+            urlBuilder_.Append("Users/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -4477,7 +5059,7 @@ namespace MriApi
         public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeatherForecast>> WeatherforecastAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/WeatherForecast");
+            urlBuilder_.Append("WeatherForecast");
 
             var client_ = _httpClient;
             var disposeClient_ = false;

@@ -15,6 +15,11 @@ using Microsoft.Extensions.Hosting;
 using MriApi;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Logging;
+using System.Net.Http;
+using Microsoft.AspNetCore.HeaderPropagation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MRI.Mvc
 {
@@ -75,7 +80,27 @@ namespace MRI.Mvc
                 //options.Scope.Add("offline_access");
             });
 
-            services.AddSingleton(new MriApiClient(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));
+            services.AddHeaderPropagation(options =>
+            {
+                options.Headers.Add("Authorization");
+                options.Headers.Add("Cookie", context =>
+                {
+                    //var accessToken = context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "access-token")?.Value;
+                    var accessToken = (context.HttpContext.GetTokenAsync("access_token")).Result;
+                    return accessToken != null ? new StringValues($"token={accessToken}") : new StringValues();
+                });
+            });
+
+            //services.AddSingleton(new MriApiClient(Configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient()));
+            services.AddHttpClient<IMriApiClient, MriApiClient>(c =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetSection("ApiUrl").GetSection("Mri").Value);
+                //c.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.GetTokenAsync())
+            }).AddHeaderPropagation(c =>
+            {
+                c.Headers.Add("Cookie");
+            });
+            //services.AddHttpClient()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +125,8 @@ namespace MRI.Mvc
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseHeaderPropagation();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -110,4 +137,29 @@ namespace MRI.Mvc
             });
         }
     }
+    public class Prob : IHttpClientFactory
+    {
+        public HttpClient CreateClient(string name)
+        {
+            throw new NotImplementedException();
+        }
+    }/*
+    public class AuthenticationDelegatingHandler : DelegatingHandler
+    {
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            var token = await GetToken();
+            request.Headers.Authorization = new AuthenticationHeaderValue(token.Scheme, token.AccessToken);
+            var response = await base.SendAsync(request, cancellationToken);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode == HttpStatusCode.Forbidden)
+            {
+                token = await RefreshToken();
+                request.Headers.Authorization = new AuthenticationHeaderValue(token.Scheme, token.AccessToken);
+                response = await base.SendAsync(request, cancellationToken);
+            }
+
+            return response;
+        }
+    }*/
 }

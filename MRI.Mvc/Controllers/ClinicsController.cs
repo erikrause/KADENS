@@ -14,8 +14,10 @@ namespace MRI.Mvc.Controllers
 {
     public class ClinicsController : Controller
     {
-        public ClinicsController()
+        readonly IMriApiClient _mriApiClient;
+        public ClinicsController(IMriApiClient mriApiClient)
         {
+            _mriApiClient = mriApiClient;
         }
         // GET: ClinicsController
         public async Task<ActionResult> Index()
@@ -25,8 +27,8 @@ namespace MRI.Mvc.Controllers
             var httpClient = new System.Net.Http.HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            var apiClient = new MriApiClient("https://localhost:44302/", httpClient);
-            var clinics = await apiClient.ClinicsGetAsync();
+            //var apiClient = new MriApiClient("https://localhost:44302/", httpClient);
+            var clinics = await _mriApiClient.ClinicsGetAsync();
             return View(clinics);
         }
 

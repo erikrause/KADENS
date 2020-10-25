@@ -16,7 +16,8 @@ namespace MRI.Mvc.Infrastructure
         }
         public MriApiClient CreateClient()
         {
-            return new MriApiClient(_configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient());
+            throw new NotImplementedException();
+            //return new MriApiClient(_configuration.GetSection("ApiUrl").GetSection("Mri").Value, new System.Net.Http.HttpClient());
         }
     }
 }
